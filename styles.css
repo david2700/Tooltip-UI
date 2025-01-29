@@ -1,0 +1,173 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 3rem 0;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    position: relative;
+    padding: 0.5rem;
+}
+
+/* Tooltip styles */
+.nav-links a::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem 1rem;
+    background-color: #333;
+    color: white;
+    font-size: 0.875rem;
+    border-radius: 10px;
+    white-space: nowrap;
+    display: hidden;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+    margin-top: -2px;
+    display: hidden;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+/* Tooltip hover effects */
+.nav-links a:hover::before,
+.nav-links a:hover::after {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Add these new styles and modify existing ones */
+.nav-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.hamburger {
+    display: block;
+    position: relative;
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+    width: 2rem;
+    height: 3px;
+    background-color: #333;
+    transition: transform 0.3s ease;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    left: 0;
+}
+
+.hamburger::before { top: -8px; }
+.hamburger::after { top: 8px; }
+
+/* Media query for responsive design */
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: block;
+        z-index: 1000;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: white;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+        gap: 1rem;
+        transform: translateY(-150%);
+        transition: transform 0.3s ease;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
+    }
+
+    .nav-container {
+        position: relative;
+    }
+    .navbar {
+        width: 100%;
+    }
+
+    /* Adjust tooltip position for mobile */
+    .nav-links a::before {
+        left: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-left: 1rem;
+        margin-top: 0;
+        height: 60%;
+    }
+
+    .nav-links a::after {
+        left: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-left: -5px;
+        border-color: transparent #333 transparent transparent
+    }
+
+}
